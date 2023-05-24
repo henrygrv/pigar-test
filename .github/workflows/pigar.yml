@@ -27,7 +27,7 @@ jobs:
         id: check
         with:
           old: requirements.txt
-          new: /home/runner/work/pigar-test/requirements.txt
+          new: /home/runner/work/pigar-test/pigar-test/requirements.txt
           mode: addition
           tolerance: same
       - name: add requirements.txt
