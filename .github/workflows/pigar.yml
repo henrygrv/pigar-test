@@ -20,7 +20,7 @@ jobs:
         run: python -m pip install pigar
       - name: run pigar
         run: python -m pigar generate --auto-select --question-answer=yes
-      - run: cat requirements.txt
+      - run: ls -a && cat requirements.txt
       - run: cd /home/runner/work/pigar-test/pigar-test && cat requirements.txt
       - name: compare files
         id: check
