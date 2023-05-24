@@ -28,7 +28,8 @@ jobs:
         with:
           old: requirements.txt
           new: /home/runner/work/pigar-test/requirements.txt
-          mode: same
+          mode: additions
+          tolerance: same
       - name: add requirements.txt
         if: steps.check.outputs.passed
         run: "git config --local user.email \"github-actions@github.com\"\ngit config --local user.name \"github-actions\"\ngit add /home/runner/work/pigar-test/pigar-test/requirements.txt\ngit commit -a -m \"Add requiremnts.txt\"\ngit push \n"
