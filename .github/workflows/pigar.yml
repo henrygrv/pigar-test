@@ -8,6 +8,8 @@ jobs:
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
@@ -18,3 +20,13 @@ jobs:
         run: python -m pip install pigar
       - name: run pigar
         run: python -m pigar generate --auto-select --question-answer=yes
+      - name: add requirements.txt
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add /home/runner/work/pigar-test/pigar-test/requirements.txt
+          git commit -a -m "Add requiremnts.txt"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          force_with_lease: true
