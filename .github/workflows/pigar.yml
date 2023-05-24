@@ -24,7 +24,7 @@ jobs:
         run: python -m pigar generate --auto-select --question-answer=yes
       - name: compare files
         id: check
-        run: "cmp --silent requirements.txt /home/runner/work/pigar-test/pigar-test/requirements.txt || echo \"outcome=false\" >> $GITHUB_OUTPUT\necho \"There were no changes found in the requirements file!\" >> $GITHUB_STEP_SUMMARY\n  \n"
+        run: cmp --silent requirements.txt /home/runner/work/pigar-test/pigar-test/requirements.txt || echo "outcome=false" >> $GITHUB_OUTPUT
       - name: add requirements.txt
         if: steps.check.outputs.outcome == 'false'
         run: "git config --local user.email \"github-actions@github.com\"\ngit config --local user.name \"github-actions\"\ngit add /home/runner/work/pigar-test/pigar-test/requirements.txt\ngit commit -a -m \"Add requiremnts.txt\"\ngit push \n"
