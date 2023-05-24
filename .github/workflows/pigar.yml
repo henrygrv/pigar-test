@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: "git pull"
-      - run: pwd && cat requirements.txt
+      - run: cp requirements.txt requirements_old.txt
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
