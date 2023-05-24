@@ -22,9 +22,9 @@ jobs:
       - run: cd /home/runner/work/pigar-test/pigar-test && cat requirements.txt
       - name: compare files
         id: check
-        run: "cmp --silent requirements_old.txt requirements.txt \necho \"outcome=$?\" >> $GITHUB_OUTPUT\n"
+        run: cmp --silent requirements_old.txt requirements.txt || echo "outcome='true'" >> $GITHUB_OUTPUT
       - name: check output
         run: echo "${{ steps.check.outputs.outcome }}"
       - name: add requirements.txt
-        if: steps.check.outputs.outcome != 0
+        if: steps.check.outputs.outcome == 'true'
         run: "git config --local user.email \"github-actions@github.com\"\ngit config --local user.name \"github-actions\"\ngit add requirements.txt\ngit commit -a -m \"Add requirements.txt\"\ngit push \n"
