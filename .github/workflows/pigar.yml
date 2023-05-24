@@ -22,7 +22,7 @@ jobs:
       - run: cd /home/runner/work/pigar-test/pigar-test && cat requirements.txt
       - name: compare files
         id: check
-        run: cmp --silent requirements_old.txt requirements.txt || echo "outcome='true'" >> $GITHUB_OUTPUT
+        run: cmp --silent requirements_old.txt requirements.txt || echo "outcome=true" >> $GITHUB_OUTPUT
       - name: check output
         run: echo "${{ steps.check.outputs.outcome }}"
       - name: add requirements.txt
