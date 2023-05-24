@@ -21,12 +21,4 @@ jobs:
       - name: run pigar
         run: python -m pigar generate --auto-select --question-answer=yes
       - name: add requirements.txt
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add /home/runner/work/pigar-test/pigar-test/requirements.txt
-          git commit -a -m "Add requiremnts.txt"
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          force_with_lease: true
+        run: "git config --local user.email \"github-actions[bot]@users.noreply.github.com\"\ngit config --local user.name \"github-actions[bot]\"\ngit add /home/runner/work/pigar-test/pigar-test/requirements.txt\ngit commit -a -m \"Add requiremnts.txt\"\ngit push \n"
