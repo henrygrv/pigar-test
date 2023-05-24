@@ -1,5 +1,6 @@
 name: pigar
 on: push
+permissions: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,4 +22,4 @@ jobs:
       - name: run pigar
         run: python -m pigar generate --auto-select --question-answer=yes
       - name: add requirements.txt
-        run: "git config --local user.email \"henrygrv@users.noreply.github.com\"\ngit config --local user.name \"henry groves\"\ngit add /home/runner/work/pigar-test/pigar-test/requirements.txt\ngit commit -a -m \"Add requiremnts.txt\"\ngit push \n"
+        run: "git config --local user.email \"github-actions@github.com\"\ngit config --local user.name \"github-actions\"\ngit add /home/runner/work/pigar-test/pigar-test/requirements.txt\ngit commit -a -m \"Add requiremnts.txt\"\ngit push \n"
