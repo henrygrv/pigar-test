@@ -1,0 +1,21 @@
+name: pigar
+on: push
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ubuntu-latest
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Display Python version
+        run: python --version
+      - name: Install pigar dependency
+        run: python -m pip install pigar
+      - name: run pigar
+        run: python -m pigar generate
