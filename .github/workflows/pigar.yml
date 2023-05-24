@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.11"]
+        python-version: ["3.11"]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -22,5 +22,13 @@ jobs:
         run: python -m pip install pigar
       - name: run pigar
         run: python -m pigar generate --auto-select --question-answer=yes
+      - name: compare files
+        uses: LouisBrunner/diff-action@v0.2.0
+        id: check
+        with:
+          old: requirements.txt
+          new: /home/runner/work/pigar-test/requirements.txt
+          mode: same
       - name: add requirements.txt
+        if: steps.check.outputs.passed
         run: "git config --local user.email \"github-actions@github.com\"\ngit config --local user.name \"github-actions\"\ngit add /home/runner/work/pigar-test/pigar-test/requirements.txt\ngit commit -a -m \"Add requiremnts.txt\"\ngit push \n"
