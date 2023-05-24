@@ -27,5 +27,5 @@ jobs:
       - name: check output
         run: echo "${{ steps.check.outputs.outcome }}"
       - name: add requirements.txt
-        if: steps.check.outputs.outcome
+        if: steps.check.outputs.outcome == 1
         run: "git config --local user.email \"github-actions@github.com\"\ngit config --local user.name \"github-actions\"\ngit add /home/runner/work/pigar-test/pigar-test/requirements.txt\ngit commit -a -m \"Add requirements.txt\"\ngit push \n"
