@@ -16,8 +16,6 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Display Python version
-        run: python --version
       - name: Install pigar dependency
         run: python -m pip install pigar
       - name: run pigar
@@ -25,6 +23,8 @@ jobs:
       - name: compare files
         id: check
         run: cmp --silent requirements.txt /home/runner/work/pigar-test/pigar-test/requirements.txt || echo "outcome=false" >> $GITHUB_OUTPUT
+      - name: check output
+        run: echo ${{ steps.check.outputs.outcome}}
       - name: add requirements.txt
         if: steps.check.outputs.outcome == 'false'
         run: "git config --local user.email \"github-actions@github.com\"\ngit config --local user.name \"github-actions\"\ngit add /home/runner/work/pigar-test/pigar-test/requirements.txt\ngit commit -a -m \"Add requiremnts.txt\"\ngit push \n"
