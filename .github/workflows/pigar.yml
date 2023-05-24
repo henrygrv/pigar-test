@@ -28,7 +28,7 @@ jobs:
         with:
           old: requirements.txt
           new: /home/runner/work/pigar-test/pigar-test/requirements.txt
-          mode: addition
+          mode: deletion
           tolerance: worse
       - name: add requirements.txt
         if: steps.check.outputs.passed
