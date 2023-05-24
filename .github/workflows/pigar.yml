@@ -18,6 +18,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install pigar dependency
         run: python -m pip install pigar
+      - run: ls -a
       - name: run pigar
         run: python -m pigar generate --auto-select --question-answer=yes
       - name: compare files
