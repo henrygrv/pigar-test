@@ -10,7 +10,6 @@ jobs:
         python-version: ["3.11"]
     steps:
       - uses: actions/checkout@v3
-      - run: "git pull"
       - run: cp requirements.txt requirements_old.txt
       - name: Set up Python
         uses: actions/setup-python@v3
@@ -23,7 +22,7 @@ jobs:
       - run: cd /home/runner/work/pigar-test/pigar-test && cat requirements.txt
       - name: compare files
         id: check
-        run: "cmp requirements_old.txt requirements.txt \necho \"outcome=$?\" >> $GITHUB_OUTPUT\n"
+        run: "cmp --silent requirements_old.txt requirements.txt \necho \"outcome=$?\" >> $GITHUB_OUTPUT\n"
       - name: check output
         run: echo "${{ steps.check.outputs.outcome }}"
       - name: add requirements.txt
