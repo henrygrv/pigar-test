@@ -18,9 +18,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install pigar dependency
         run: python -m pip install pigar
-      - run: cd && ls -a
       - name: run pigar
         run: python -m pigar generate --auto-select --question-answer=yes
+      - run: cat requirements.txt
+      - run: cd /home/runner/work/pigar-test/pigar-test && cat requirements.txt
       - name: compare files
         id: check
         run: "cmp requirements.txt /home/runner/work/pigar-test/pigar-test/requirements.txt \necho \"outcome=$?\" >> $GITHUB_OUTPUT\n"
