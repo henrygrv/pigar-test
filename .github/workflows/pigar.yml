@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        # change python version here (or select multiple)
         python-version: ["3.11"]
     steps:
       - uses: actions/checkout@v3
@@ -19,12 +20,11 @@ jobs:
         run: python -m pip install pigar
       - name: run pigar
         run: python -m pigar generate --auto-select --question-answer=yes
-      - run: cd /home/runner/work/pigar-test/pigar-test && cat requirements.txt
       - name: compare files
         id: check
+        # check if the old file and the new file are the same
         run: cmp --silent requirements_old.txt requirements.txt || echo "outcome=true" >> $GITHUB_OUTPUT
-      - name: check output
-        run: echo "${{ steps.check.outputs.outcome }}"
       - name: add requirements.txt
+        # if the files are the same, then push the new requirements.txt file to the repository
         if: steps.check.outputs.outcome == 'true'
         run: "git config --local user.email \"github-actions@github.com\"\ngit config --local user.name \"github-actions\"\ngit add requirements.txt\ngit commit -a -m \"Add requirements.txt\"\ngit push \n"
